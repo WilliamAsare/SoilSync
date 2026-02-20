@@ -1,36 +1,104 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🌱 SoilSync — AI Soil Intelligence for African Farmers
 
-## Getting Started
+> Built for the MIT Africa Hackathon 2025
 
-First, run the development server:
+SoilSync solves a critical problem: African smallholder farmers make planting and logistics decisions without accurate soil data, leading to low yields, wasted inputs, post-harvest losses, and unstable income.
 
+**Our solution:** Snap a photo of soil → AI delivers instant soil intelligence, crop planning, shelf-life prediction, and transport coordination.
+
+---
+
+## The Problem
+
+- 600M+ smallholder farmers lack access to affordable soil testing
+- Up to 40% of harvests are lost post-harvest due to poor planning
+- Farmers sell at harvest-time price lows, missing 30–50% potential income
+- Wrong crop choices for soil type lead to systematically low yields
+
+## The Solution
+
+| Feature | What it does |
+|---|---|
+| 📸 Soil Analysis | Camera/upload photo → AI detects pH, nutrients (N, P, K), soil type, moisture |
+| 🌾 Crop Planning | Top 5 crop recommendations ranked by soil suitability with yield estimates |
+| ⏱ Shelf-Life Prediction | Per-crop storage duration, methods, and urgency flags |
+| 🚛 Transport Coordination | Market timing, transport methods, and income-maximizing sell-time advice |
+
+---
+
+## Quick Start
+
+### 1. Install dependencies
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Set up environment
+```bash
+cp .env.example .env.local
+# Add your Anthropic API key to .env.local
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 3. Run development server
+```bash
+npm run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Open [http://localhost:3000](http://localhost:3000)
 
-## Learn More
+> **Demo mode:** The app works fully without an API key using realistic demo data.
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Tech Stack
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **Framework:** Next.js 16 (App Router) + TypeScript
+- **Styling:** Tailwind CSS v4
+- **AI:** Claude Sonnet 4 (Anthropic) via `@anthropic-ai/sdk`
+- **Icons:** Lucide React
 
-## Deploy on Vercel
+## App Structure
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```
+src/
+├── app/
+│   ├── page.tsx           # Landing page
+│   ├── analyze/page.tsx   # Camera capture + upload
+│   ├── results/page.tsx   # Full analysis results
+│   ├── dashboard/page.tsx # Farm dashboard + history
+│   └── api/analyze/       # AI analysis endpoint
+├── components/
+│   └── Navigation.tsx
+├── lib/
+│   ├── anthropic.ts       # Claude AI integration
+│   └── demo-data.ts       # Demo/fallback data
+└── types/
+    └── soil.ts            # TypeScript interfaces
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## How the AI Works
+
+The app sends soil photos to Claude's vision API with a detailed prompt instructing it to analyze:
+
+- **Color** → organic matter, iron content, salinity indicators
+- **Texture** → sandy/clay/loam classification
+- **Moisture** → visual moisture level detection
+- **Structure** → compaction, drainage, soil health
+
+Claude returns structured JSON with soil health scores, nutrient estimates, crop recommendations with shelf-life data, and transport/logistics advice.
+
+---
+
+## Deployment
+
+Deploy to Vercel:
+
+```bash
+npx vercel
+```
+
+Set `ANTHROPIC_API_KEY` in your Vercel environment variables.
+
+---
+
+*SoilSync — Empowering African farmers with AI intelligence, one soil photo at a time.*
