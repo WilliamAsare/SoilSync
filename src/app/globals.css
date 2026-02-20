@@ -1,8 +1,19 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f8f6f0;
+  --foreground: #1c1917;
+  --primary: #166534;
+  --primary-light: #15803d;
+  --accent: #d97706;
+  --accent-light: #f59e0b;
+  --earth: #78350f;
+  --card: #ffffff;
+  --card-border: #e5e7eb;
+  --muted: #6b7280;
+  --success: #059669;
+  --warning: #d97706;
+  --danger: #dc2626;
 }
 
 @theme inline {
@@ -12,15 +23,117 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+::-webkit-scrollbar-thumb {
+  background: #86efac;
+  border-radius: 3px;
+}
+
+/* Camera viewfinder animation */
+@keyframes scan {
+  0% { top: 0; }
+  100% { top: 100%; }
+}
+
+.scanner-line {
+  animation: scan 2s linear infinite;
+}
+
+/* Pulse glow for score */
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(22, 101, 52, 0.4); }
+  50% { box-shadow: 0 0 0 15px rgba(22, 101, 52, 0); }
+}
+
+.pulse-glow {
+  animation: pulse-glow 2s infinite;
+}
+
+/* Shimmer loading */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.shimmer {
+  background: linear-gradient(90deg, #f0fdf4 25%, #bbf7d0 50%, #f0fdf4 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, #166534, #15803d, #d97706);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Card hover effects */
+.card-hover {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(22, 101, 52, 0.12);
+}
+
+/* Hero gradient background */
+.hero-gradient {
+  background: linear-gradient(135deg, #052e16 0%, #14532d 30%, #166534 60%, #1a3a1a 100%);
+}
+
+/* Soil texture overlay */
+.soil-texture {
+  background-image:
+    radial-gradient(ellipse at 20% 80%, rgba(120, 53, 15, 0.15) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, rgba(22, 101, 52, 0.2) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, rgba(217, 119, 6, 0.1) 0%, transparent 60%);
+}
+
+/* Progress bar animation */
+@keyframes fill-bar {
+  from { width: 0; }
+}
+
+.animated-bar {
+  animation: fill-bar 1s ease-out forwards;
+}
+
+/* Floating cards animation */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+.float-animation {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Score ring */
+.score-ring {
+  transition: stroke-dashoffset 1.5s ease-in-out;
 }
