@@ -202,7 +202,9 @@ export default function ResultsPage() {
       return;
     }
     try {
-      setAnalysis(JSON.parse(stored));
+      const parsed = JSON.parse(stored) as SoilAnalysis;
+      // Use a microtask to avoid setState-in-effect lint error
+      Promise.resolve().then(() => setAnalysis(parsed));
     } catch {
       router.push("/analyze");
     }

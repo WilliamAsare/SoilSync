@@ -7,7 +7,6 @@ import {
   Camera,
   Leaf,
   TrendingUp,
-  BarChart2,
   Clock,
   ChevronRight,
   Trash2,
@@ -16,7 +15,6 @@ import {
   Loader2,
 } from "lucide-react";
 import type { AnalysisHistory } from "@/types/soil";
-import { getDemoAnalysis } from "@/lib/demo-data";
 
 const DEMO_TIPS = [
   { icon: "🌱", title: "Test Soil pH", tip: "Apply lime to raise pH if below 5.5 for most crops." },
